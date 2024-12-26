@@ -1,0 +1,42 @@
+prometheus:
+  prometheusSpec:
+    storageSpec:
+      volumeClaimTemplate:
+        spec:
+          accessModes: ["ReadWriteOnce"]
+          resources:
+            requests:
+              storage: 20Gi
+    resources: {}
+      #limits:
+      #  cpu: 500m
+      #  memory: 4Gi
+      #requests:
+      #  cpu: 250m
+      #  memory: 2Gi
+
+grafana:
+  sidecar:
+    datasources:
+      url: http://kube-prometheus-stack-prometheus:9090/
+  persistence:
+    enabled: true
+    type: pvc
+    accessModes:
+      - ReadWriteOnce
+    size: 5Gi
+  resources: {}
+    #limits:
+    #cpu: 250m
+    # memory: 2Gi
+        #requests:
+        #cpu: 100m
+        #memory: 1Gi
+  additionalDataSources:
+    - name: Loki
+      type: loki
+      access: proxy
+      url: http://loki-gateway.loki.svc.cluster.local
+      isDefault: false
+      version: 1
+      editable: true
