@@ -1,0 +1,20 @@
+primary:
+  resources: {}
+  persistence:
+    enabled: true
+    size: 2Gi
+
+readReplicas:
+  replicaCount: 1
+  resources: {}
+  persistence:
+    enabled: true
+    size: 2Gi
+
+metrics:
+  enabled: true
+  serviceMonitor:
+    enabled: true
+    interval: 30s
+    labels:
+      release: kube-prometheus-stack

@@ -1,0 +1,30 @@
+master:
+  masterOnly: false
+  replicaCount: 1
+  resources: {}
+  heapSize: 128m
+  persistence:
+    enabled: true
+    size: 500Mi
+
+data:
+  replicaCount: 1
+  resources: {}
+  heapSize: 1024m
+  persistence:
+    enabled: true
+    size: 500Mi
+
+coordinating:
+  replicaCount: 0
+
+ingest:
+  enabled: false
+
+metrics:
+  enabled: true
+  serviceMonitor:
+    enabled: true
+    interval: 30s
+    labels:
+      release: kube-prometheus-stack

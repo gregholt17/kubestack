@@ -1,0 +1,18 @@
+replicaCount: 2
+
+auth:
+  rootUser: admin
+
+resources: {}
+
+persistence:
+  enabled: true
+  size: 1Gi
+
+metrics:
+  enabled: true
+  serviceMonitor:
+    enabled: true
+    interval: 30s
+    labels:
+      release: kube-prometheus-stack

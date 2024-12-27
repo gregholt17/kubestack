@@ -1,0 +1,29 @@
+ingress:
+  enabled: true
+  ingressClassName: nginx
+  annotations:
+    nginx.ingress.kubernetes.io/backend-protocol: "HTTP" # Change to HTTPS if MinIO is secured
+    nginx.ingress.kubernetes.io/secure-backends: "false" # Secure-backends not needed if HTTP
+    nginx.ingress.kubernetes.io/whitelist-source-range: "0.0.0.0/0"
+  path: /
+  pathType: Prefix
+  hostname: minio.local
+
+# auth:
+#   rootUser: admin
+#   rootPassword: minio
+
+persistence:
+  enabled: true
+  size: 20Gi
+
+resources: {}
+
+metrics:
+  enabled: true
+  serviceMonitor:
+    enabled: true
+    labels:
+      release: kube-prometheus-stack
+    interval: 30s
+    scrapeTimeout: 10s
